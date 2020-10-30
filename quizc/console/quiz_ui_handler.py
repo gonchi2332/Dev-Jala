@@ -1,4 +1,5 @@
 from quizc.console.quiz_input_handler import QuestionInputHandler
+from quizc.console.quiz_ui_loader import QuizLoader
 from quizc.console.quiz_ui_menu import QuizUIMenu
 from quizc.model.quiz import Quiz
 from quizc.model.quiz_answers import QuizAnswer, Answer
@@ -27,7 +28,14 @@ class QuizUIHandler(object):
     def show_quiz(quiz_answer):
         print(quiz_answer.quiz.title)
         print("=============================================")
+        cont = 1
         for answer in quiz_answer.answers:
-            print(answer)
+            print(answer.show_answer(cont))
+            cont += 1
 
         return quiz_answer
+
+
+def save_quiz(quiz, quiz_answers):
+    loader = QuizLoader()
+    loader.save_quiz(quiz, quiz_answers)
